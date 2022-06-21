@@ -6,8 +6,13 @@ The bulk of this code is taken directly from OpenCV's usage example.
 
 1. Using the 1cm x 1cm chessboard grid, take a sample shot and count how many pixels are in each square to obtain the image resolution in px/mm.
 2. Make a new sample clip of the chessboard moving around. Try to cover as much of the FoV as possible for best result.
-3. In `calibrate.py` set the chessboard height and width in line 6 and the input video file name in line 17.
-4. Run `python calibrate.py` to generate calibration parameter file.
+3. Run `calibrate.py` with the chessboard height and width (flags `-h` and `-w`) and the input video file name (flag `-v`). Example:
+
+``` python calibrate.py -h 7 -w 7 -v debarrel.mp4 ```
+
+Note that the height and width is determined by the number of INTERSECTION POINTS along each axis and not by number of squares.
+
+5. Run `python calibrate.py` to generate calibration parameter file.
 
 ## Barrel distortion correction
 
@@ -26,7 +31,7 @@ for example the above line will launch the script using 'calibration_parameters_
 ## Cropping
 
 `cropper.py` is just there to trim the clips with a graphic update to keep track of how things look. The GUI usage was copied from pyimagesearch's tutorial for a similar work. 
-1. This code has a single input flag `-v` for video filename (without the extension).
+1. Run the code with flags `-v` for video filename (without the extension) and `=f` for framerate.
 2. Once started it opens the first frame of the video on a separate window (i.e. this code cannot be used on a headless setup).
 3. Press any key with the image view on top.
 4. Now the terminal should prompt you to enter left crop value. Enter any number as desired, and the change should be reflected immediately on the image window.
