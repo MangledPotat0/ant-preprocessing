@@ -5,16 +5,19 @@ import numpy as np
 import os
 import sys
 
-fps = 10
+filepath = os.path.dirname(os.path.realpath(__file__))
+datadir = 'C:/Desktop/Coding/ant/data/'
+vidpath = str(datadir+'videos/')
 
 # Load video
 ap = argparse.ArgumentParser()
 ap.add_argument('-v', '--video', type=str, required=True,
                 help='Input video file without file extension')
+ap.add_argument('-f', '--fps', type=int, required=True.
+                help='fps for the video')
 
 args = vars(ap.parse_args())
-filepath = os.path.dirname(os.path.realpath(__file__))
-vidpath = '../../data/videos/'
+fps = args['fps']
 
 try:
     vidstream = cv.VideoCapture('{}{}.mp4'.format(vidpath,args['video']))
