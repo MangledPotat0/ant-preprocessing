@@ -1,9 +1,21 @@
+import argparse
 import numpy as np
 import cv2 as cv
 import glob
 import json
 
-h,w = (7, 7)
+ap = argparse.ArgumentParser()
+ap.add_argument('-h', '--height', dtype=int,
+                help='Height of chessboard')
+ap.add_argument('-w', '--width', dtype=int,
+                help='Width of chessboard')
+ap.add_argument('-v', '--video', dtype=str,
+                help='Chessboard video file')
+
+args = vars(ap.parse_args())
+h = args['height']
+w = args['width']
+vfile = args['video']
 
 # termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -14,7 +26,7 @@ objp[:,:2] = np.mgrid[0:w,0:h].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
-vid = cv.VideoCapture('debarrel.mp4')
+vid = cv.VideoCapture(vfile)
 run, img = vid.read()
 newimg = img
 loops = 0
