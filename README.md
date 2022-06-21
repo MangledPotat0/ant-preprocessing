@@ -31,7 +31,7 @@ for example the above line will launch the script using 'calibration_parameters_
 ## Cropping
 
 `cropper.py` is just there to trim the clips with a graphic update to keep track of how things look. The GUI usage was copied from pyimagesearch's tutorial for a similar work. 
-1. Run the code with flags `-v` for video filename (without the extension) and `=f` for framerate.
+1. Run the code with flags `-v` for video filename (without the extension) and `-f` for framerate.
 2. Once started it opens the first frame of the video on a separate window (i.e. this code cannot be used on a headless setup).
 3. Press any key with the image view on top.
 4. Now the terminal should prompt you to enter left crop value. Enter any number as desired, and the change should be reflected immediately on the image window.
