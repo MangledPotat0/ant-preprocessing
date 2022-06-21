@@ -22,9 +22,9 @@ The bulk of this code is taken directly from OpenCV's usage example. Simple run:
 
 The argument flags are
 
--f  : fps \
--px : image resolution in px/mm \
--v  : video file name
+`-f`  : fps \
+`-px` : image resolution in px/mm \
+`-v`  : video file name
 
 for example the above line will launch the script using 'calibration_parameters_10px.npz' and sets the output video at 10 frames per second. The -v flag can also take more than one video file. For this the filenames can be entered with spaces in between, or using wildcard to pattern match a bulk of files (e.g. -v \*.mp4 will run the unbarrel procedure on every .mp4 in the directory).
 
