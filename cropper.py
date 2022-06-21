@@ -1,25 +1,11 @@
-###############################################################################
-#                                                                             #
-#   Ant imaging experiment video cropper for python 3.7.4                     #
-#   Code written by Dawith Lim                                                #
-#                                                                             #
-#   Version: 1.3.1                                                            #
-#   First written on: 2020/12/07                                              #
-#   Last modified: 2021/12/24                                                 #
-#                                                                             #
-#   Description:                                                              #
-#     Crop ant tracking video using manual adjustments                        #
-#                                                                             #
-#   Packages used:                                                            #
-#                                                                             #
-###############################################################################
-
 import argparse
 import cv2 as cv
 import imutils
 import numpy as np
 import os
 import sys
+
+fps = 10
 
 # Load video
 ap = argparse.ArgumentParser()
@@ -121,7 +107,7 @@ api = cv.CAP_ANY
 out = cv.VideoWriter(filename = '{}{}cropped.mp4'.format(vidpath,args['video']),
                      apiPreference = api,
                      fourcc = fourcc,
-                     fps = 10.0,
+                     fps = fps,
                      frameSize = (height, width),
                      isColor = True,
                      )
