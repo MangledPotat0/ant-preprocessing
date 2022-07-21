@@ -8,7 +8,7 @@ import sys
 
 ap = arg.ArgumentParser()
 ap.add_argument('-v', '--video', required = True,
-                help = 'Video files without extension')
+                help = 'Video files')
 ap.add_argument('-px', '--pixel', required = True,
                 help = 'Pixel resolution')
 ap.add_argument('-f', '--framerate', required = True,
