@@ -1,14 +1,14 @@
-# Documentation
+# Preprocessing for ant data
 
-## Calibration parameter generation
+## How to generate calibration parameter file
 
 The bulk of this code is taken directly from OpenCV's usage example.
 
 1. Using the 1cm x 1cm chessboard grid, take a sample shot and count how many pixels are in each square to obtain the image resolution in px/mm.
-2. Make a new sample clip of the chessboard moving around. Try to cover as much of the FoV as possible for best result.
+2. Make a new sample clip of the chessboard moving around. Try to cover as much of the FoV as possible for best result, but make sure the boad stays in the FOV at all times; otherwise it fails to detect the grid.
 3. Run `calibrate.py` with the chessboard height and width (flags `-h` and `-w`) and the input video file name (flag `-v`). Example:
 
-``` python calibrate.py -h 7 -w 7 -v debarrel.mp4 ```
+``` python calibrate.py -h 7 -w 7 -v VIDEOFILE ```
 
 Note that the height and width is determined by the number of INTERSECTION POINTS along each axis and not by number of squares.
 
@@ -18,7 +18,7 @@ Note that the height and width is determined by the number of INTERSECTION POINT
 
 The bulk of this code is taken directly from OpenCV's usage example. Simple run:
 
-```python unbarrel.py -f 10 -px 10 -v samplevid.mp4```
+``` python unbarrel.py -f 10 -px 10 -v VIDEOFILE```
 
 The argument flags are
 
