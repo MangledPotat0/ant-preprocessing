@@ -17,29 +17,33 @@ datapath = str(datapath + 'preprocessed\\')
 
 
 ap = arg.ArgumentParser()
-ap.add_argument('-id', '--expid', required = True,
+ap.add_argument('-id', '--expid', required = True, nargs='+',
                 help = 'ID for target experiment')
 ap.add_argument('-px', '--pixel', required = True,
                 help = 'Pixel resolution')
 ap.add_argument('-f', '--framerate', required = True,
                 help = 'framerate')
 args = vars(ap.parse_args())
-filenames = args['expid']
-filenames = glob.glob(filenames)
+expids = args['expid']
 
 with np.load('calibration_parameters_{}px.npz'.format(args['pixel'])) as values:
     for expid in expids:
-        vidfile = cv.VideoCapture('{}{}{}.mp4'.format(srpath, expid, expid))
+        vidfile = cv.VideoCapture('{}{}\\{}.mp4'.format(srcpath, expid, expid))
         readable, frame = vidfile.read()
+        print('{}{}\\{}.mp4'.format(srcpath, expid, expid))
         mtx = values['mtx']
         dist = values['dist']
         newcameramtx = values['newcameramtx']
         roi = values['roi']
         x1, y1, x2, y2 = roi
 
+        try:
+            os.mkdir('{}{}'.format(datapath,expid))
+        except OSError:
+            pass
         fourcc = cv.VideoWriter_fourcc(*'mp4v')
         api = cv.CAP_ANY
-        out = cv.VideoWriter(filename = '{}{}{}corrected.mp4'.format(datapath,
+        out = cv.VideoWriter(filename = '{}{}\\{}corrected.mp4'.format(datapath,
                                                             expid,expid),
                              apiPreference = api,
                              fourcc = fourcc,
