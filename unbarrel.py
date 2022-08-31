@@ -12,7 +12,7 @@ with open('paths.json','r') as f:
     codepath = paths['codepath']
     datapath = paths['datapath']
 
-srcpath = str(datapath + 'raw\\'
+srcpath = str(datapath + 'raw\\')
 datapath = str(datapath + 'preprocessed\\')
 
 
