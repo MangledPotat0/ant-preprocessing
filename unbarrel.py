@@ -18,13 +18,13 @@ datapath = str(datapath + 'preprocessed\\')
 
 ap = arg.ArgumentParser()
 ap.add_argument('-id', '--expid', required = True,
-                help = 'Video files')
+                help = 'ID for target experiment')
 ap.add_argument('-px', '--pixel', required = True,
                 help = 'Pixel resolution')
 ap.add_argument('-f', '--framerate', required = True,
                 help = 'framerate')
 args = vars(ap.parse_args())
-filenames = args['video']
+filenames = args['expid']
 filenames = glob.glob(filenames)
 
 with np.load('calibration_parameters_{}px.npz'.format(args['pixel'])) as values:
