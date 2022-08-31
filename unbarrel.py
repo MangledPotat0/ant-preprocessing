@@ -6,8 +6,18 @@ import json
 import os
 import sys
 
+
+with open('paths.json','r') as f:
+    paths = json.load(f)
+    codepath = paths['codepath']
+    datapath = paths['datapath']
+
+srcpath = str(datapath + 'raw\\'
+datapath = str(datapath + 'preprocessed\\')
+
+
 ap = arg.ArgumentParser()
-ap.add_argument('-v', '--video', required = True,
+ap.add_argument('-id', '--expid', required = True,
                 help = 'Video files')
 ap.add_argument('-px', '--pixel', required = True,
                 help = 'Pixel resolution')
@@ -18,9 +28,8 @@ filenames = args['video']
 filenames = glob.glob(filenames)
 
 with np.load('calibration_parameters_{}px.npz'.format(args['pixel'])) as values:
-    for fname in filenames:
-        filename = os.path.splitext(fname)[0]
-        vidfile = cv.VideoCapture('{}.mp4'.format(filename))
+    for expid in expids:
+        vidfile = cv.VideoCapture('{}{}{}.mp4'.format(srpath, expid, expid))
         readable, frame = vidfile.read()
         mtx = values['mtx']
         dist = values['dist']
@@ -30,7 +39,8 @@ with np.load('calibration_parameters_{}px.npz'.format(args['pixel'])) as values:
 
         fourcc = cv.VideoWriter_fourcc(*'mp4v')
         api = cv.CAP_ANY
-        out = cv.VideoWriter(filename = '{}corrected.mp4'.format(filename),
+        out = cv.VideoWriter(filename = '{}{}{}corrected.mp4'.format(datapath,
+                                                            expid,expid),
                              apiPreference = api,
                              fourcc = fourcc,
                              fps = int(args['framerate']),
@@ -43,8 +53,8 @@ with np.load('calibration_parameters_{}px.npz'.format(args['pixel'])) as values:
             out.write(dst)
             readable, frame = vidfile.read()
 
-    vidfile.release()
-    out.release()
+        vidfile.release()
+        out.release()
     cv.destroyAllWindows()
 sys.exit(0)
 
